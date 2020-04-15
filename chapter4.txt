@@ -1,6 +1,5 @@
-hi every one
 <<<<<<< HEAD
-hello
+welcome
 =======
-hi mule 14
+git class
 >>>>>>> 4ff8e3e0483cee76ccbfd04550381e6bbd40108e
