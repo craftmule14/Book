@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:email="http://www.mulesoft.org/schema/mule/email" xmlns:sockets="http://www.mulesoft.org/schema/mule/sockets"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/sockets http://www.mulesoft.org/schema/mule/sockets/current/mule-sockets.xsd
+http://www.mulesoft.org/schema/mule/email http://www.mulesoft.org/schema/mule/email/current/mule-email.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="ee14a8a4-7460-42d9-9cdf-c4643fce0436" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<email:smtp-config name="Email_SMTP" doc:name="Email SMTP" doc:id="3f6c3df8-3780-4298-9545-1a378900be7b" >
+		<email:smtp-connection host="smtp.gmail.com" port="587" user="samenati@gmail.com" password="77441100" >
+			<email:properties >
+				<email:property key="mail.smtp.starttls.enable" value="true" />
+			</email:properties>
+		</email:smtp-connection>
+	</email:smtp-config>
+	<flow name="test_emailFlow" doc:id="6bc214a3-cd86-49ef-91a6-07f731f8e5f3" >
+		<http:listener doc:name="Listener" doc:id="e673707c-5390-4ece-b66d-e6b9f248f90e" config-ref="HTTP_Listener_config" path="/email"/>
+		<email:send doc:name="Send" doc:id="5388cf47-da33-4040-b44a-1fb63c4e0c46" config-ref="Email_SMTP" fromAddress="samenati@gmail.com" subject="happy">
+			<email:to-addresses >
+			</email:to-addresses>
+		</email:send>
+		<set-payload value="#[payload]" doc:name="Set Payload" doc:id="2feca64c-1698-49aa-908d-5b710b6bd959" />
+	</flow>
+</mule>
