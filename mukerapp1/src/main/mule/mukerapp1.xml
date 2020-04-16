@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="b4de543c-d454-4085-890d-c47be4ce521a" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="mukerapp1Flow" doc:id="127e9f5e-4b84-4503-964b-831141e0ca5f" >
+		<http:listener doc:name="Listener" doc:id="bd821019-cbb7-42e2-abce-15d5e0a7df1a" config-ref="HTTP_Listener_config" path="/MukerApp"/>
+		<set-payload value="This is My Mukera Mule Application" doc:name="Set Payload" doc:id="183537db-7fa1-4de9-8604-d27a2940f855" />
+		<logger level="INFO" doc:name="Logger" doc:id="a64be051-b7b6-4f90-92eb-b5f4b530ebd9" message="#[payload]"/>
+	</flow>
+</mule>
