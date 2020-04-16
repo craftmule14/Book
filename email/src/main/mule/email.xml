@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:email="http://www.mulesoft.org/schema/mule/email"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/email http://www.mulesoft.org/schema/mule/email/current/mule-email.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<email:smtp-config name="Email_SMTP" doc:name="Email SMTP" doc:id="7118b48a-e9d5-438c-b059-1d23b5377e0f" >
+		<email:smtp-connection host="local host" port="8081" />
+	</email:smtp-config>
+	<email:smtp-config name="Email_SMTP1" doc:name="Email SMTP" doc:id="adf97115-7cf8-479e-b412-b9d2de4bc91d" >
+		<email:smtp-connection host="smtp.gmail.com" port="587" user="ritawegayehu68@gmail.com" password="rita213753" >
+			<email:properties >
+				<email:property key="mail.smtpl.startts.enable" value="True" />
+			</email:properties>
+		</email:smtp-connection>
+	</email:smtp-config>
+	<email:smtp-config name="Email_SMTP2" doc:name="Email SMTP" doc:id="07e27cfb-670a-4c88-8b2a-6b3dd4d63677" >
+		<email:smtp-connection host="smtp.gmail.com" port="587" user="ritawegayehu68@gmail.com" password="rita213753" />
+	</email:smtp-config>
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="b79a2736-c0c9-4f53-a2f4-f8a462811ef5" >
+		<http:listener-connection host="0.0.0.0" port="9090" />
+	</http:listener-config>
+	<flow name="emailFlow" doc:id="383cd9eb-8a98-4ec1-8bef-1fea074f42f1" >
+		<http:listener doc:name="Listener" doc:id="afacd486-4128-4bab-98d4-d2998c23a6aa" config-ref="HTTP_Listener_config" path="/email"/>
+		<email:send doc:name="Send" doc:id="46957b5e-96e1-4b34-a56f-d3c5e6fdf747" config-ref="Email_SMTP1" fromAddress="ritawegayehu68@gmail.com" subject="hi">
+			<email:to-addresses >
+				<email:to-address value="esayas.tes49@gmail.com" />
+				<email:to-address value="bpomi94@gmail.com" />
+			</email:to-addresses>
+		</email:send>
+		<set-payload value="this message is to rita wegayehu nigatu" doc:name="email successful sent" doc:id="ff528d1e-ec12-4407-ae91-9c5e48904a45" />
+	</flow>
+</mule>
