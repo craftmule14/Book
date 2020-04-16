@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="1ddf2d97-0d53-4038-82a4-c9953e42d0a2" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="errorhandling2onpropagatFlow" doc:id="887f3d9c-9cc9-4720-9ea0-772b523e5aea" >
+		<http:listener doc:name="Listener" doc:id="44c11bd9-2fb9-436f-869f-36f59bbbb7a4" path="/prop" config-ref="HTTP_Listener_config"/>
+		<ee:transform doc:name="Transform Message" doc:id="06fb23b7-a575-4e31-9bd7-799d983c4447" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+
+	payload
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<set-payload value="#[payload]" doc:name="Set Payload" doc:id="280d4585-ccbe-4856-a6e1-5c44029b7cd3" />
+		<error-handler>
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="ea4c0efb-df1f-4798-8bde-7527244fb9fd" >
+				<set-payload value="error propaget can not despalayed " doc:name="Set Payload" doc:id="dc5d43f9-ecf9-4df7-8826-d5340b28a150" />
+				<logger level="INFO" doc:name="Logger" doc:id="6b2f3af3-936b-4706-ba2f-31f1d2f5946c" message="#[payload]"/>
+			</on-error-propagate>
+		</error-handler>
+	</flow>
+</mule>
