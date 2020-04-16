@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="cd3a97d3-1191-4bc3-ab32-90e38b2ea9e5" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="errorhandlingtryFlow" doc:id="55ac542c-da16-406f-ab62-da400baf77c5" >
+		<http:listener doc:name="Listener" doc:id="78978fe3-d2bd-4b58-8e14-5e70b6856822" config-ref="HTTP_Listener_config" path="/try"/>
+		<try doc:name="Try" doc:id="ad2e16ec-acf3-46b4-9ade-aa517e402be0" >
+			<ee:transform doc:name="Transform Message" doc:id="1c837aac-42b2-4469-9e03-2e1b174c40ca" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<set-payload value="#[payload]" doc:name="Set Payload" doc:id="bbf6f0df-2cf2-43cd-98c3-7243c924050d" />
+			<error-handler >
+				<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="2b50e6f2-8a60-4733-8b41-00ea2692efe3" >
+					<set-payload value="payload1" doc:name="Set Payload" doc:id="57041bbe-17de-4409-ab24-9648f014ecd1" />
+					<logger level="INFO" doc:name="Logger" doc:id="265c33b2-c56b-4525-8499-4225e3c05817" message="#[payload]"/>
+				</on-error-continue>
+			</error-handler>
+		</try>
+		<try doc:name="Try" doc:id="9b5fa388-8d5b-43b3-8020-5693affd5e71" >
+			<ee:transform doc:name="Transform Message" doc:id="13e9a96e-ed04-4e4a-ab09-86d608981eee" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+payload
+
+]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<set-payload value="#[payload]" doc:name="Set Payload" doc:id="478dcfcf-a182-4451-8230-c9d211784d01" />
+			<error-handler>
+				<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="02844649-de6c-4ba3-aba0-ad37e5cdec80" >
+					<set-payload value="massage from error propaget" doc:name="Set Payload" doc:id="38a7a646-9e24-4411-94f0-608c9b39e6ad" />
+					<logger level="INFO" doc:name="Logger" doc:id="d9c2633d-ebb7-4830-91d1-d3d6653d4551" message="#[payload]"/>
+				</on-error-propagate>
+			</error-handler>
+		</try>
+		<try doc:name="Try" doc:id="2c6c8d5e-1071-4080-b83c-a29988b6f04e" >
+			<ee:transform doc:name="Transform Message" doc:id="e7115b10-1ad6-4cbe-866e-8da9b814f180" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+{
+	"na":"wdew",
+	"hid":"tela"
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<set-payload value="#[payload]" doc:name="Set Payload" doc:id="d384b3d8-80c8-4266-8bb8-5172894973b4" />
+			<error-handler >
+				<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="8f68eb22-39cf-4ed4-b3ce-4ed3fffa2669" >
+					<set-payload value="payload massage from three" doc:name="Set Payload" doc:id="6439ee29-8f31-4159-8ad3-f7462228e5f7" />
+					<logger level="INFO" doc:name="Logger" doc:id="8ac8f549-2701-4c24-9412-9bf9d4657e83" message="#[payload]"/>
+				</on-error-continue>
+			</error-handler>
+		</try>
+		<set-payload value="payload completed with out any problem" doc:name="Set Payload" doc:id="34ca19ce-20dc-4a8e-a3e3-692612bf34b5" />
+	</flow>
+</mule>
