@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="test-test-suite.xml" />
+	<munit:test name="test-test-suite-testFlowTest" doc:id="410fec58-a854-495f-8d1d-c428a19508a4" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to testFlow" doc:id="3bd9693f-8671-431f-a5eb-016a0fb12254" name="testFlow"/>
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:assert-equals doc:name="Assert equals" doc:id="2e4bd90e-42af-4ce1-a635-b7125386188b" actual="#[payload]" expected='#["name":"abreha"]'/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="test-test-suite-testFlow1Test" doc:id="045394b4-ce1a-4fc2-bd78-50b4a9ff1a5f" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to testFlow1" doc:id="5f254179-f1be-4f34-b5a4-35523690c501" name="testFlow1"/>
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:assert-that doc:name="Assert that" doc:id="3bc13512-5afa-4fb3-83bf-42939626ea8d" message=" shuld not fail" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>

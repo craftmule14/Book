@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="f0ec2550-a9ac-4867-8d5a-5a6b27dd284b" >
+		<http:listener-connection host="0.0.0.0" port="8082" />
+	</http:listener-config>
+	<flow name="testFlow" doc:id="de762b48-42ac-4f7f-968e-2a81dfee4bfc" >
+		<http:listener doc:name="Listener" doc:id="769d83aa-762a-45b0-bdb2-b3e89353cb2e" config-ref="HTTP_Listener_config" path="/test"/>
+		<ee:transform doc:name="Transform Message" doc:id="79bb4445-49b7-43dd-8ca0-97a4a4c9608f" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"name":"abreha"
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<set-payload value="#[payload]" doc:name="Set Payload" doc:id="5dd4c9f6-2ff9-44c3-bd6a-3b468cb60a44" />
+	</flow>
+	<flow name="testFlow1" doc:id="5c493245-99e6-43c1-9473-ab2b90be92e7" >
+		<ee:transform doc:name="Transform Message" doc:id="e8cfe368-73df-4ba7-af5e-ddca342c1331" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"xx":"yy"
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<set-payload value="#[payload]" doc:name="Set Payload" doc:id="7e109f36-bd10-45fe-a992-a3d25cebc7e0" />
+	</flow>
+</mule>
