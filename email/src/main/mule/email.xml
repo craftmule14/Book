@@ -11,7 +11,7 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 	<email:smtp-config name="Email_SMTP1" doc:name="Email SMTP" doc:id="adf97115-7cf8-479e-b412-b9d2de4bc91d" >
 		<email:smtp-connection host="smtp.gmail.com" port="587" user="ritawegayehu68@gmail.com" password="rita213753" >
 			<email:properties >
-				<email:property key="mail.smtpl.startts.enable" value="True" />
+				<email:property key="mail.smtp.starttls.enable" value="True" />
 			</email:properties>
 		</email:smtp-connection>
 	</email:smtp-config>
