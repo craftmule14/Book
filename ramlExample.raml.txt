@@ -1,0 +1,59 @@
+#%RAML 1.0
+title: userApi
+
+/user:
+  get:
+    description: This method uses to retrieve data
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              message:Ok
+      404:
+        body:
+            application/json:
+              example:
+               {message:"Source Not found"}
+  post:
+    description: This method uses to create new data to the system
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+                
+                 { 
+                 "fname":"John",
+                 "lname":"Gech"
+                 }
+                
+      500:
+        body:
+          application/json:
+            example:
+              {message: "server not found"}
+/subscriber:
+  get:
+    description: This method uses to retrieve
+    queryParameters:
+      id:
+       required: true
+       example: "123"
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              {
+                id: 123,
+                firstName: GG,
+                lastName: HA
+              }
+      500:
+        body:
+          application/json:
+            example:
+              {
+               "message":"Server not found"
+              }
