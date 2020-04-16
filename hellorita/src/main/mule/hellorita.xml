@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="ce76e257-a02f-485f-b71a-8e8c872e23ee" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="helloritaFlow" doc:id="75a2244c-4793-41be-92d2-269ccfdd9272" >
+		<http:listener doc:name="Listener" doc:id="7cfe55ab-3db9-4b19-8db7-b3e44525dd1b" config-ref="HTTP_Listener_config" path="/hello"/>
+		<set-payload value="Hello Bach 14th" doc:name="Set Payload" doc:id="062d7900-f990-4024-806f-a55c8e45396b" />
+	</flow>
+</mule>
