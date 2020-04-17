@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="9bb79dfd-ecf7-4a18-9320-646337d15075" >
+		<http:listener-connection host="localhost" port="8081" />
+	</http:listener-config>
+	<flow name="helloworld2Flow" doc:id="d58f518e-0ad4-4e05-b583-bd75d986c99d" >
+		<http:listener doc:name="Listener" doc:id="cb6f0e4d-d4a3-4584-a72d-250ffbe24db1" config-ref="HTTP_Listener_config" path="Ephrem"/>
+		<logger level="INFO" doc:name="Logger" doc:id="8e130b0d-645f-43c7-8e44-8fa8014e7a7b" message="welcome back congra you deploye your first message"/>
+	</flow>
+</mule>
