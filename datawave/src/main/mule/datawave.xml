@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="2c4d351c-ba67-49e9-8669-6fc11a5b28cb" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="datawaveFlow" doc:id="12e35284-9c82-4548-b5c8-3a629b77ddac" >
+		<http:listener doc:name="Listener" doc:id="67f9ff56-a14c-4464-83fd-25e8639d53c1" path="/trans" config-ref="HTTP_Listener_config"/>
+		<ee:transform doc:name="Transform Message" doc:id="db052b8d-ed9a-4c80-99f0-e2cb46661584" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+var country= attributes.queryParams.country
+---
+if (country== "Ethiopia")
+{ currency: "birr" }
+else if (country== "USA")
+{ currency: "dollar" }
+else if (country== "UK")
+{ currency: "pound"}
+else {
+	currency: "country not found"
+	}
+	
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="a4403dbd-0f53-489b-a042-ad98eb6ae602" message="#[payload]"/>
+	</flow>
+	<flow name="datawaveFlow1" doc:id="70967b92-9379-4421-99ad-3468f3d52c0b" >
+		<http:listener doc:name="Listener" doc:id="98f8ec16-4638-442f-a057-f7f4503a83f4" path="/geb" config-ref="HTTP_Listener_config"/>
+		<set-variable value="geb" doc:name="Set Variable" doc:id="11411bb4-97e8-46d6-b8b5-18ae62e689f7" variableName="g"/>
+		<ee:transform doc:name="Transform Message" doc:id="fba481bb-49de-4d24-a6b5-2856ba1415cb" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+import * from dw::util::Diff
+output application/java
+
+var a= "word"
+var b= {"age": "test"}
+var c= {"age": "test"}
+var d= [1,2,3] ++ ["x","y","z"]
+var e= avg([10,500])
+var f=["a","b","c"] joinBy "*"
+var g=["john","piter","dave"] joinBy "&"
+var h= max([700,500,400])
+var i= min([3,90,3,6])
+var j= ["my","three", a ]
+---
+vars.g]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>

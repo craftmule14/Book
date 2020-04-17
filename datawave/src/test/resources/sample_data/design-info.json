@@ -1,0 +1,19 @@
+{
+  "sampleData": {
+    "6ded58c2-78af-4fc1-a794-be6020d0bd4f": {
+      "payload": "sample_data/unknown_3.dwl"
+    },
+    "def78a1b-9f1e-4cd3-a18e-4f32458a2637": {
+      "payload": "sample_data/unknown_1.dwl"
+    },
+    "7035a314-5db8-4259-90d4-0c8d19cfd300": {
+      "payload": "sample_data/unknown_2.dwl"
+    },
+    "3806aae0-cab4-4557-a0d1-f852aa335251": {
+      "payload": "sample_data/unknown.dwl"
+    },
+    "91be59c6-223e-4886-9990-0799219996e9": {
+      "payload": "sample_data/unknown_4.dwl"
+    }
+  }
+}
