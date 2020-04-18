@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="c9843c9d-dad2-43cc-8ebb-0828a2acb397" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="function" doc:id="b87b2ecd-5af7-48cd-a820-0dc97c595b32" >
+		<http:listener doc:name="Listener" doc:id="ed8b3cca-3c86-46e1-9a03-bf63e2fa6781" path="/function" config-ref="HTTP_Listener_config"/>
+		<ee:transform doc:name="Transform Message" doc:id="2875ce12-6678-4e32-946c-a7d15a1582bd" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+
+var firstname = "abebe"
+var lastname = "kebede"
+var num1 = 5
+var num2 = 10
+var num3 = 15
+var result = num1+num2
+var username = payload
+
+fun calcunum() = num1+num2+num3
+fun userfullname() = "user full name is " ++  firstname ++ " " ++ lastname
+fun mypayload() = payload
+--- 
+mypayload() 
+//userfullname()]]></ee:set-payload>
+			</ee:message>
+ 
+		</ee:transform>
+		</flow>
+	</mule>
