@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="2a393ac1-ba18-4478-bfe6-b2a5905a039a" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="hello_git2Flow" doc:id="2acc2c91-5ecc-40ab-874a-f2e186c28c15" >
+		<http:listener doc:name="Listener" doc:id="0a6f8749-f9cd-4487-b4e1-147f340faef6" config-ref="HTTP_Listener_config" path="/git2"/>
+		<ee:transform doc:name="Transform Message" doc:id="d5727f43-8514-4aba-9d18-16e79c23c780" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+var x = 20
+var y = 10
+var z = 70
+var sum1 = x+y
+var multi1 = x*y
+var div1 = x/y
+var sub1 = x-y
+var total = x+y+z
+---
+total
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>
