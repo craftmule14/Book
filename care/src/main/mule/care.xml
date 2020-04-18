@@ -4,10 +4,10 @@
 	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
-	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="ba7e8c59-2dfa-4699-b5b5-7de22b58836d" >
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="32ca6c13-2bca-430d-895c-33502e88b2ef" >
 		<http:listener-connection host="0.0.0.0" port="8081" />
 	</http:listener-config>
-	<flow name="trycatchFlow" doc:id="ac4ede09-9916-4874-b6ff-4cadad4db43c" >
-		<http:listener doc:name="Listener" doc:id="6b1c7ad3-97d2-42dc-aae4-e4d3a0feb387" config-ref="HTTP_Listener_config" path="/fg"/>
+	<flow name="careFlow" doc:id="e2242425-740c-418a-8c12-d325ee5b2a2a" >
+		<http:listener doc:name="Listener" doc:id="b8046c75-1c9a-423f-bd2e-9197ae2af552" config-ref="HTTP_Listener_config" path="/minas"/>
 	</flow>
 </mule>
