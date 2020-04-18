@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 this project is end
+=======
+the project is end
+>>>>>>> b59b1a99faac570003def736558e01c662a27880

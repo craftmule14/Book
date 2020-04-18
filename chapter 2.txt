@@ -1,1 +1,6 @@
 hi every one
+<<<<<<< HEAD
+hello
+=======
+hi mule 14
+>>>>>>> 4ff8e3e0483cee76ccbfd04550381e6bbd40108e

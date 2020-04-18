@@ -1,0 +1,12 @@
+import * from dw::util::Diff
+output application/json
+var a= "word"
+var b= {"age": "test"}
+var c= {"age": "test"}
+var d= [1,2,3] ++ ["x","y","z"]
+var e= avg([10,500])
+var f=["a","b","c"] joinBy "*"
+var g=["john","piter","dave"] joinBy "&"
+var h= max([700,500,400])
+var i= min([3,90,3,6])
+var j= ["my","three", a ]
