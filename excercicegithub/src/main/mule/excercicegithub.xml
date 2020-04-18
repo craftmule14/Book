@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="370ca693-afca-462a-ba7f-3f53b1508361" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="excercicegithubFlow" doc:id="2a7998af-a334-4e0f-b47e-3b3686e2abd7" >
+		<http:listener doc:name="Listener" doc:id="98c4fda9-13b2-44bf-afd3-1a7527bc09a7" config-ref="HTTP_Listener_config" path="/exa"/>
+		<set-payload value="hello evry one" doc:name="Set Payload" doc:id="8b8a4017-7872-4a97-9a9c-cd06da2a93d4" />
+	</flow>
+</mule>
