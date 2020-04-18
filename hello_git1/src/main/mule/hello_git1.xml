@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="aa943e73-bc7a-40d4-8c76-ea6c059cd904" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="hello_git1Flow" doc:id="60a0ffd4-4008-4633-b4e5-3d484e18b631" >
+		<http:listener doc:name="Listener" doc:id="bb44fe46-2449-4ddb-b58a-938a2cfb2a23" config-ref="HTTP_Listener_config" path="/git1"/>
+		<set-payload value="Welcome all." doc:name="Set Payload" doc:id="dfc3fae0-f1ad-446f-b332-ebd5f8542bcd" />
+		<logger level="INFO" doc:name="Logger" doc:id="618208b2-1045-4dce-87f6-d51682f42666" message="#[payload]"/>
+	</flow>
+</mule>
