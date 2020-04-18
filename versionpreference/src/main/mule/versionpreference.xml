@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="1bebb2b0-90c4-4794-9df5-4a790136dfb7" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="versionpreferenceFlow" doc:id="119fce96-b916-42ba-bae2-e66d679605aa" >
+		<http:listener doc:name="Listener" doc:id="c15ac965-a70c-492e-8dfd-b264b2bd83c8" config-ref="HTTP_Listener_config" path="/log"/>
+		<set-payload value="Hello version fixing" doc:name="Set Payload" doc:id="ee68439d-0b57-48b5-8482-3c696c330c0f" />
+		<logger level="INFO" doc:name="Logger" doc:id="a937c2c3-3cd7-42d7-bd7d-6a06c08dcc2f" message="#[payload]"/>
+	</flow>
+</mule>
