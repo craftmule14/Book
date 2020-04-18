@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:validation="http://www.mulesoft.org/schema/mule/validation"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/validation http://www.mulesoft.org/schema/mule/validation/current/mule-validation.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="ImplemationFlow" doc:id="87e3eff1-3931-4ddf-a560-5612d5283557" >
+		<logger level="INFO" doc:name="Logger" doc:id="b1d1fb2c-a80c-4e66-a5fe-028862457ff1" message="phoneNumbervalidation;"/>
+		<validation:matches-regex doc:id="8bb33004-ea66-488c-9628-b43a372431d1" value="#[attributes.queryParams.phoneNumber]" regex="^[0-9]{11}$" message="not valid phoneNumber"/>
+		<http:request method="POST" doc:name="Request" doc:id="1d074e30-4591-475f-821d-0f36de60c561" config-ref="HTTP_Request_configuration" path="${http.numverify.path}">
+			<http:query-params ><![CDATA[#[output application/java
+---
+{
+	number : attributes.queryParams.phoneNumber,
+	access_key:p('access_key')
+}]]]></http:query-params>
+		</http:request>
+		<logger level="INFO" doc:name="Logger" doc:id="f43cd5eb-65fd-4c65-a513-8b0b3ff845de" message="validation is successful"/>
+	</flow>
+</mule>

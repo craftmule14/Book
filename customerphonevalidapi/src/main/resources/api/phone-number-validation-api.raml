@@ -1,0 +1,43 @@
+#%RAML 1.0
+title: Phone Validation API
+version: 1.0
+
+/phone:
+  description: customer phone validation api 
+  get:
+    queryParameters:
+      phoneNumber:
+        description: phonenumber
+        type: string
+        required: true
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              {
+                "phonenumber":"1234567890",
+                "validphone":true
+              }
+      404:
+        body:
+          application/json:
+            example:
+              {
+                "phonenumber":"1234567890",
+                "validphone":false
+              }  
+      302:
+        body:
+          application/json:
+            example:
+              {
+                "message":"anautorized person"
+              }
+      500:
+        body:
+          application/json:
+            example:
+              {
+               "message" :"INTERNAL SERVOR EROR"
+              }
