@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="8646b73a-7335-433d-9cac-e5aacc72c622" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="datawave1Flow" doc:id="2d87e7fe-19ef-46c1-a99e-ae3ba27d4688" >
+		<http:listener doc:name="Listener" doc:id="eea65a8d-db68-4bfc-a883-710d8761151b" path="input" config-ref="HTTP_Listener_config"/>
+		<ee:transform doc:name="Transform Message" doc:id="941b798d-cd14-4a8b-b0b9-57d33795d0c2" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+
+payload.age
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+	
+	<flow name="datawave1Flow1" doc:id="97b106ef-0802-4878-ac38-e3db90b72ebf" >
+		<http:listener doc:name="Listener" doc:id="b9c5949c-6c34-4a3f-9814-8a32c2d85206" path="/variable" config-ref="HTTP_Listener_config"/>
+		<ee:transform doc:name="Transform Message" doc:id="c27cd04c-c041-47ab-94f3-db895c1e4757" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+
+var name = "abebe"
+var num1 = 5
+var num2 = 10
+var result = num1+num2
+
+---
+result]]></ee:set-payload>
+			</ee:message>
+ 
+		</ee:transform>
+		</flow>
+		<flow name="import" doc:id="e374c51b-28e4-46d8-acab-fea20a7f2879" >
+		<http:listener doc:name="Listener" doc:id="3c9f7ef1-7132-4496-8d3f-ee7c8e43c751" path="/import" config-ref="HTTP_Listener_config"/>
+		<ee:transform doc:name="Transform Message" doc:id="d41d4c96-46de-437d-8fec-e70f1ed32216" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+import * from dw::util::Diff
+output application/json
+var x = "words"
+var a = {age : "Test"}
+var b = {age : "Test2"}
+var c = [1,2,3] ++ ["a","b","c"]
+var d = avg([10,500])
+var e = ["a","b","c"] joinBy "*"
+var f = ["john","piter","tomas"] joinBy "&"
+var g = max([1,700,500,1000])
+var h = min([1,700,500,1000])
+var myarray = ["my","three","x"]
+
+---
+g diff h]]></ee:set-payload>
+			</ee:message>
+
+			
+			</ee:transform>
+		</flow>
+		
+	<flow name="conditions" doc:id="40ada3b4-501f-419a-bcab-16f67e70950c" >
+		<http:listener doc:name="Listener" doc:id="b27f5d3c-92f5-4f66-82ce-00887dbe30e3" path="/condition" config-ref="HTTP_Listener_config"/>
+		<ee:transform doc:name="Transform Message" doc:id="3c9d4f9f-1de7-4a52-bb08-a1fbc1edee1d" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+
+//Var country = "Ethiopia"
+ 
+ var country = attributes.queryParams.country
+---
+
+if (country == "Ethiopia")
+   {currency : "To Birr"} 
+   
+ else if (country == "USA")
+   {currency : "To dollar"}
+
+   else if (country == "UK")
+      {currency : "To pound"}
+     
+    else {currency : "country not found"}]]></ee:set-payload>
+			</ee:message>
+
+			</ee:transform>
+		</flow>
+	
+	</mule>
