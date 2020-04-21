@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:validation="http://www.mulesoft.org/schema/mule/validation"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/validation http://www.mulesoft.org/schema/mule/validation/current/mule-validation.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="5582962f-01d1-4087-8a81-59920da7c376" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<validation:config name="Validation_Config" doc:name="Validation Config" doc:id="b781c369-d6f0-4fdc-9eb6-ae851d6d68f2" />
+	<db:config name="Database_Config" doc:name="Database Config" doc:id="c7aee06c-093a-413c-ba32-2418c7042400" >
+		<db:my-sql-connection host="localhost" port="3306" user="root" database="mydatabase2" />
+	</db:config>
+	<flow name="practice_only" doc:id="5807ef4d-d109-47e1-891d-8604c9a863d3" >
+		<http:listener doc:name="Listener" doc:id="56adbed8-7b7c-4715-af37-27e9fec83b3d" config-ref="HTTP_Listener_config" path="/practiceOnly"/>
+		<choice doc:name="Choice" doc:id="944d4477-229b-40bb-9d47-2f38bee8a533">
+			<when expression='#[attributes.queryParams.color=="dark"]'>
+				<set-payload value='{Labe:"Dark roasted coffee"}' doc:name="Set Payload" doc:id="ea4630f2-99fc-46b5-98c5-88b5c72ade6f" />
+			</when>
+			<when expression='#[attributes.queryParams.color == "brown"]'>
+				<set-payload value='{Labe:"Medium roasted coffee"}' doc:name="Set Payload" doc:id="ef2bd308-7282-4718-aebe-a78fd0c32ed8" />
+			</when>
+			<when expression='#[attributes.queryParams.color=="light"]'>
+				<set-payload value='{Labe:Light roasted coffee"}' doc:name="Set Payload" doc:id="57eb82bb-eb38-43b6-99a5-085d5fda9a98" />
+			</when>
+			<otherwise >
+				<set-payload value='{Message:"Enter a valid color for the color of the roasted coffee to get an appropriate label"}' doc:name="Set Payload" doc:id="3546f86b-69c4-4f5d-85e9-6d0d29f4e8aa" />
+			</otherwise>
+		</choice>
+	</flow>
+	<flow name="practice_only2" doc:id="eb28a784-2d7a-4036-b876-2d6f80e90de9" >
+		<http:listener doc:name="Listener" doc:id="384068a3-3172-472d-9262-fb0da9ce7e44" config-ref="HTTP_Listener_config" path="/muleDomain"/>
+		<ee:cache doc:name="Cache" doc:id="14550e88-ab53-4bd7-92e1-d96d7061fc9b">
+			<db:select doc:name="Select" doc:id="20e0ba00-9010-4700-bc90-41204fe18c35" config-ref="Database_Config">
+			<db:sql>select * from persons;</db:sql>
+		</db:select>
+		</ee:cache>
+		<ee:transform doc:name="Transform Message" doc:id="e70c5644-54c0-419c-aa41-f8822a16cac5">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>
