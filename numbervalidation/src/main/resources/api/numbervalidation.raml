@@ -1,0 +1,47 @@
+#%RAML 1.0
+title: numberValidation
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/e1f9ed0d-6495-4be3-acdf-6a774ea8e757/api # baseUri: http://apilayer.net/api
+securitySchemes:
+  basic:
+    type: Basic Authentication
+    displayName: Basic Authentication
+    description: Api only works with Basic Authentication
+protocols:
+  - HTTP
+description: NumVerify offers a full-featured yet simple RESTful JSON API for national and international phone number validation and information lookup for a total of 232 countries around the world.
+documentation:
+  - title: NUM VERIFY API
+    content: Refer below doc for more information https://numverify.com/documentation
+types:
+  numverfiy: !include /phonevalidate/dataType.raml
+/validate:
+  get:
+    queryParameters:
+      access_key: string
+      number:  string
+      country_code: string
+      format: string
+    description: validating the phone
+    displayName: validate phone
+    protocols:
+      - http
+    responses:
+      400:
+        body:
+          application/json:
+            properties:
+              message: string
+            example:
+              {
+              message: "API key is invalid"
+              }
+      200:
+        body:
+          application/json:
+            type: numverfiy
+            examples:
+              output: !include phonevalidate/example.raml
+
+
+
+
