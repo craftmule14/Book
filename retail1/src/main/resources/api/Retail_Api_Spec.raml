@@ -1,0 +1,234 @@
+#%RAML 1.0
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/2958bd09-3e5a-4afa-80dd-550236ff7fbf/ # 
+title: Get Product Request Abiy
+#types: !include required/trait.raml
+/Products:
+
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              {retrive succefull}
+      400:
+        body:
+          application/json:
+            example:
+              {Bad request-Get bill}
+
+  /id:
+    
+    get:
+      queryParameters:
+        id:
+          type: integer
+          required: true
+      description: create by id products
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                {"Successfully retrived by id"}
+        404:
+          body:
+            application/json:
+              example:
+                {Not found}
+    put:
+      queryParameters:
+        id:
+          type: integer
+          required: true
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                {"Successfully updated by id"}
+        400:
+          body:
+            application/json:
+              example:
+                {Bad request-update by Id}
+    delete:
+      queryParameters:
+        id:
+          type: integer
+          required: true
+      description: Delete product by Id
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                {"Successfully updated id"}
+        400:
+          body:
+            application/json:
+              example:
+                {Bad request-delete by Id}
+      
+  post:
+    description: product created
+    responses:
+      201:
+          body:
+            application/json:
+              example:
+                {"Product created"}
+      400:
+          body:
+            application/json:
+              example:
+                {Bad request-Product Post}
+      
+ 
+    
+/Bills:
+  get:
+    description: retrive bill Data  
+    responses:
+        200:
+          body:
+            application/json:
+              example:
+                {"Successfully retrived bills"}
+        404:
+          body:
+            application/json:
+              example:
+                {Not found}        
+  /id:
+    get:
+      queryParameters:
+        id:
+          type: integer
+          required: true  
+      description: create by id products
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                {"Successfully retrived bills by id"}
+        400:
+          body:
+            application/json:
+              example:
+                {Bad request-get bills by Id}   
+    put:
+      queryParameters:
+        id:
+          type: integer
+          required: true
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                {"Successfully updated bill id"}
+        400:
+          body:
+            application/json:
+              example:
+                {Bad request-update bills by Id} 
+    delete:
+      queryParameters:
+        id:
+          type: integer
+          required: true
+      description: Delete product by Id
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                {"Successfully updated id"}
+        400:
+          body:
+            application/json:
+              example:
+                {Bad request-delete bills by Id}
+
+      
+  post:
+      description: product created
+      responses:
+        201:
+          body:
+            application/json:
+              example:
+                {"Product created"}
+        400:
+          body:
+            application/json:
+              example:
+                {Bad request-delete post bills}
+  
+  
+/ProductCatagories:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              {retrive succefull}
+      400:
+          body:
+            application/json:
+              example:
+                {Bad request-for get Product catagories}
+  /id:
+    
+    get:
+      queryParameters:
+        id:
+          type: integer
+          required: true
+      description: create by Product Catagories
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                {"Product Catagories Successfully retrived by id"}
+    put:
+      queryParameters:
+        id:
+          type: integer
+          required: true
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                {"Product Catagories Successfully updated by id"}
+    delete:
+      queryParameters:
+        id:
+          type: integer
+          required: true
+      description: Delete Product Catagories by Id
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                {"Product Catagories Successfully updated id"}
+
+      
+  post:
+    description: Product Catagories Created
+    responses:
+      201:
+          body:
+            application/json:
+              example:
+                {"Product Catagories created"}
+  
+
+  
+      
