@@ -1,0 +1,7 @@
+{
+  "id": 5, 
+  "name": "Product", 
+  "barcode": "bbb123", 
+  "rate": 4.3, 
+  "productCategory": "Category1" 
+}

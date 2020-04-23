@@ -1,0 +1,128 @@
+#%RAML 1.0
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/cb26b552-a14f-4aaf-9c23-37f787f0a1c9/ # 
+title: Retail API Specification
+version: 1.0
+/products:
+  get:
+    description: fetches list of all product data
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include example/productsExample.json
+  post:
+    description: creates a new product based on request JSON
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include example/productsExample.json
+  /{id}:
+    uriParameters:
+      id:
+        type: integer
+        required: true
+    get:
+      description: fetch a specific product
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include example/productsExample.json
+    put:
+      description: Updates product data based on request JSON
+      responses:
+        200:
+          body:
+            application/json:
+              example: {message: "product information updated"}     
+    delete:
+      description: Delete an existing product if it is not associated with a bill
+      responses:
+        200:
+          body:
+            application/json:
+              example: {message: "product information deleted"}          
+/bills:
+  get:
+    description: fetches all bill data
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include example/billsExample.json
+  post:
+    description: creates a bill Id. Client has to use this bill Id while adding and removing products
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include example/billsExample.json
+  /{id}:
+    uriParameters:
+      id:
+        type: integer
+        required: true
+    get:
+      description: fetches bill of a particular id
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include example/billsExample.json
+    put:
+      description: Updates bill data. Client can add or remove products to bill sending a JSON request.
+      responses:
+        200:
+          body:
+            application/json:
+              example: {message: "bill information updated"}     
+    delete:
+      description: Delete bill from the system
+      responses:
+        200:
+          body:
+            application/json:
+              example: {message: "bill information deleted"}  
+/productCategories:
+  get:
+    description: fetches list of all productcatagory data
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include example/productCategoriesExample.json
+  post:
+    description: Creates a new productcatagory based on request JSON
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include example/productCategoriesExample.json
+  /{id}:
+    uriParameters:
+      id:
+        type: integer
+        required: true
+    get:
+      description: fetch a specific productcatagory
+      responses:
+        200:
+          body:
+            application/json:
+              example: !include example/productCategoriesExample.json
+
+    put:
+      description: Updates productcatagory data based on request JSON
+      responses:
+        200:
+          body:
+            application/json:
+              example: {message: "product category information updated"}     
+    delete:
+      description: Delete an existing productcatagory
+      responses:
+        200:
+          body:
+            application/json:
+              example: {message: "product category information deleted"} 
