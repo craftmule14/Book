@@ -1,0 +1,206 @@
+#%RAML 1.0
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/834fc6b9-7a95-4b31-b49c-31499597e275/ # 
+title: Retail API
+version: 1.0
+
+/products:
+  get:
+    description: fetches list of all products.
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              {"message": "ok"}
+      400:
+        body:
+          application/json:
+            example:
+              {"message": "not found"}
+  /id:
+    description: fetcha specificproduct
+    get:
+      queryParameters:
+        id:
+          type: integer
+          required: true
+
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                { "message": " sucessful"}
+                
+           
+    put:
+      queryParameters:
+        id:
+          type: integer
+          required: true
+      description:  Updatesproductdatabasedon requestJSON
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+    delete:
+      queryParameters:
+        id:
+          type: integer
+          required: true
+      description:  Delete anexisting product if it is not associatedwitha bill
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                { "message": "oaky"}
+
+                
+                  
+
+                     
+  post:
+    description: Createsanew productbasedon requestJSON
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              { "message": "created new products sucessfuly"}
+/Bills:
+  get:
+    description: fetches all bill data
+    responses:
+      500:
+        body:
+          application/json:
+            example:
+              {" server error"}
+  /id:
+    description: fetches bill of aparticular id
+    get:
+      queryParameters:
+        id:
+          type: integer
+          required: true
+      
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                {"fetched the bill"}
+             
+    put:
+      queryParameters:
+        id:
+          type: integer
+          required: true
+      description: Updatesbill data.Client canadd or remove productstobill sending aJSONrequest
+      responses:
+        400:
+          body:
+            application/json:
+              example:
+                {" message not found"}
+    delete:
+      queryParameters:
+        id:
+          type: integer
+          required: true
+      description:  Deletebill fromthesystem
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                {"message oaky"}
+                           
+  post:
+    description: createsabill Id.Client hastouse thisbill Idwhile adding andremoving products
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              {"message ok"}
+/product catagory:
+  get:
+    description: fetcheslist of all productcatagorydata
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              {" message": "ok"}
+  /id:
+    description: fetcha specificproductcatagory
+    get:
+      queryParameters:
+        id:
+          type: integer
+          required: true
+      
+      
+
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                {"oky"}
+    put:
+      queryParameters:
+        id:
+          type: integer
+          required: true
+      description: Updatesproductcatagorydatabased onrequestJSON
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                {"okay"}
+    delete:
+      queryParameters:
+        id:
+          type: integer
+          required: true
+      description: Delete anexistingproductcatagory
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                {"sucessful"}
+
+  post:
+    description: Createsanew productcatagorybasedon requestJSON
+    responses:
+      500:
+        body:
+          application/json:
+            example:
+              { "server fail"}
+                            
+    
+
+
+         
+          
+                 
+                  
+      
+
+
+              
+
+  
+    
+      
+  
+          
+
+    
