@@ -1,0 +1,199 @@
+#%RAML 1.0
+title: retail_API
+version: 1.0
+
+/products:
+  description: retrive products data
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example : {"retrive succssfully"}
+      401:
+       body:
+         application/json:
+            example: {"bad request"}
+                         
+  /id:
+    description: retrive by specfic id products
+    get:
+      queryParameters:
+        id:
+          type: integer
+          required: true
+      responses:
+        200:
+          body:
+            application/json:
+              example: {"suucessfully create by id"}
+    put:
+      description: updeate by specfic id 
+      responses:
+        200:
+          body:
+            application/json:
+              example: {"updeate successfuly"}
+                
+    delete: 
+     description: remove by specfic id
+     queryParameters:
+        id:
+          type: integer
+          required: true
+     responses:
+        200:
+          body:
+            application/json:
+              example: {"remove product by specfic id"}
+                                 
+                        
+    
+  post:
+    description: create  products 
+    responses:
+      201:
+        body:
+          application/json:
+            example: {"successfully add"}
+
+
+        
+/Bills:
+  description: retrive all bill data
+  get:
+    description: fetch bill data
+    responses:
+       200:
+         body:
+            application/json:
+              example: {"retrive all bill data"}
+       404:
+         body:
+            application/json:
+              example:
+                {"data not found"}          
+  post:
+    description: create all bill data
+    responses:
+      200:
+        body:
+          application/json:
+            example: {"successfully creat all bill data"}
+      
+  /id:
+    description: retrive bill data by id 
+    get:
+      queryParameters:
+        id:
+          type: integer
+          required: true      
+      description: fetch data
+      responses:
+        200:
+          body:
+            application/json:
+             example: {"retrive all bill data by specfic id"}
+              
+    put:
+      queryParameters:
+        id:
+          type: integer
+          required: true      
+      description: updeate bill data by particular id 
+      responses:
+        200:
+          body:
+            application/json:
+              example: {"successfully updeate bill data by id"}
+    delete:
+      queryParameters:
+        id:
+          type: integer
+          required: true      
+      description: remove bill data by particular id
+      responses:
+        400:
+          body:
+            application/json:
+              example: {"bad request"}
+        407:
+          body:
+            application/json:
+               example: {"Proxy Authentication Required"} 
+/productcatagory: 
+  description: retrive productcatagorie
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example : {
+              "retrive succssfully"}
+      501:
+        body:
+          application/json:
+            example:  { Not Implemented } 
+                   
+
+  /id:
+    description: retrive by specfic id products
+    get:
+      queryParameters:
+        id:
+          type: integer
+          required: true      
+      responses:
+        200:
+          body:
+            application/json:
+              example: {
+                "suucessfully create by id"}
+    put:
+      queryParameters:
+        id:
+          type: integer
+          required: true      
+      description: updeate by specfic id 
+      responses:
+        200:
+          body:
+            application/json:
+              example: {"updeate successfuly"}
+                
+    delete:
+      queryParameters:
+        id:
+          type: integer
+          required: true             
+      description: remove by specfic id
+      responses:
+        200:
+          body:
+            application/json:
+              example: {"remove productcatagorie by specfic id"}
+
+    
+  post:
+    description: create  by  id productcatagorie
+    responses:
+      201:
+        body:
+          application/json:
+            example: {"successfully add"} 
+                
+
+         
+         
+    
+      
+
+    
+ 
+
+
+    
+
+
+      
+
